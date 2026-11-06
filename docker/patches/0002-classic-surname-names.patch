@@ -1,0 +1,14 @@
+diff --git a/src/server/game/Globals/ObjectMgr.cpp b/src/server/game/Globals/ObjectMgr.cpp
+index 6b5040bb..06654484 100644
+--- a/src/server/game/Globals/ObjectMgr.cpp
++++ b/src/server/game/Globals/ObjectMgr.cpp
+@@ -170,6 +170,9 @@ bool normalizePlayerName(std::string& name)
+     if (first == std::wstring::npos)
+         return false;
+     tmp = tmp.substr(first, tmp.find_last_not_of(blanks) - first + 1);
++    // Classic 1.60.1.70425+: the client shows and sends "Name Surname" (e.g. add friend by name). Character names never
++    // contain blanks, so keep the first word only
++    tmp = tmp.substr(0, tmp.find_first_of(blanks));
+ 
+     wstrToLower(tmp);
+     if (!tmp.empty())

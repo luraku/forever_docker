@@ -49,6 +49,16 @@ docker compose up -d
 docker compose logs -f worldserver # the first start imports the database (a few minutes)
 ```
 
+### Without compiling (prebuilt image)
+
+A small machine (or [Androdock](https://github.com/luraku/Androdock) on a phone) cannot compile TrinityCore. The
+`Image TrinityCore` workflow publishes a prebuilt image for `linux/arm64` and `linux/amd64` on
+`ghcr.io/luraku/forever-trinitycore`; use it instead of `docker compose build`:
+
+```sh
+docker compose -f docker-compose.yml -f docker-compose.androdock.yml up -d
+```
+
 ### Ports
 
 Forward these ports to the server on your router / firewall (**TCP only**, no UDP needed):
